@@ -3,8 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": ["./src/basic-maths.js"],
+    "coverageThreshold": {
+      "global": {
+        "lines": 90
+      }
+    }
+  },
   "scripts": {
-    "test": "jest --env=jsdom",
+    "test": "jest --env=jsdom --coverage",
     "start": "webpack --mode development",
     "build": "webpack-dev-server"
   },

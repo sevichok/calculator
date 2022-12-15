@@ -18,26 +18,27 @@ const rootSquareButton = document.getElementById('root-square')
 const rootCubeButton = document.getElementById('root-cube')
 const factorialButton = document.getElementById('factorial')
 const degreeXTenButton = document.getElementById('degree-x-ten')
-degreeXTenButton.addEventListener('click', () => {
+if(degreeXTenButton){degreeXTenButton.addEventListener('click', () => {
     calculator.doDegreeXTen()
-})
+})}
 
 const memoClear = document.getElementById('mc')
-memoClear.addEventListener('click', () => {
+if(memoClear){memoClear.addEventListener('click', () => {
     calculator.memoClear()
-})
+})}
 const memoPlus = document.getElementById('m+')
-memoPlus.addEventListener('click', () => {
+if(memoPlus){memoPlus.addEventListener('click', () => {
     calculator.memoPlus()
-})
+})}
 const memoMinus = document.getElementById('m-')
-memoMinus.addEventListener('click', () => {
+if(memoMinus){memoMinus.addEventListener('click', () => {
     calculator.memoMinus()
-})
+})}
 const memoRead = document.getElementById('mr')
-memoRead.addEventListener('click', () => {
+if(memoRead){memoRead.addEventListener('click', () => {
     calculator.memoRead()
-})
+})}
+
 
 const calculator = new Calculator(input, output)
 module.exports = {
@@ -50,11 +51,12 @@ module.exports = {
     complement: calculator.complement,
     plusminus: calculator.switchPlusMinus,
     percent: calculator.switchNumPercent,
-    rootsquare: calculator.rooSquare,
+    rootsquare: calculator.rootSquare,
     rootcube: calculator.rootCube,
     rootxnum: calculator.rootXnum,
     factorial: calculator.factorial,
     degreexnum: calculator.degreeXnum,
+    degreeXten: calculator.degreeXten
 }
 
 class OnPercentSwitch {

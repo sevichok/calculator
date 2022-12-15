@@ -1,32 +1,50 @@
+const { sum, subtract, multiply, divide, cube, square, complement,
+    plusminus, percent, rootcube, rootsquare, rootxnum, degreexnum, factorial, degreeXten } = require('./basic-maths')
+
 class Calculator {
     constructor(input, output) {
         this.inputDisplay = input
         this.outputDisplay = output
         this.inputHistory = []
         this.memoNumber = 0
+        this.sum = sum
+        this.minus = subtract
+        this.multiply = multiply
+        this.divide = divide
+        this.cube = cube
+        this.square = square
+        this.complement = complement
+        this.switchPlusMinus = plusminus
+        this.switchNumPercent = percent
+        this.rootCube = rootcube
+        this.rootSquare = rootsquare
+        this.rootXnum = rootxnum
+        this.degreeXnum = degreexnum
+        this.factorial = factorial
+        this.degreeXten = degreeXten
     }
-    memoClear() {
+    memoClear() { //очистка числа в памяти
         this.memoNumber = 0
         console.log(this.memoNumber)
     }
-    memoRead() {
+    memoRead() { // вывод числа памяти на экран
         this.updateOutputDisplay(this.memoNumber)
         console.log(this.memoNumber)
     }
-    memoPlus() {
+    memoPlus() { //число из памяти + число на экране
         this.memoNumber += Number(this.outputDisplay.value)
         console.log(this.memoNumber)
     }
-    memoMinus() {
+    memoMinus() { //от числа из памяти отнять число на экране
         this.memoNumber -= Number(this.outputDisplay.value)
         console.log(this.memoNumber)
     }
-    clearHistory() {
+    clearHistory() { //очистка истории полностью
         this.inputHistory = []
         this.updateInputDisplay()
         this.updateOutputDisplay()
     }
-    backspace() {
+    backspace() { //удаление последнего элемента ввода
         switch (this.getLastElemType()) {
             case 'number':
                 if (this.getLastElemValue().length > 1) {
@@ -42,14 +60,14 @@ class Calculator {
                 return;
         }
     }
-    insertNumber(value) {
+    insertNumber(value) { //ввод числа
         if (this.getLastElemType() === 'number') {
             this.addToLastValue(value)
         } else if (this.getLastElemType() === 'math' || this.getLastElemType() === null) {
             this.addNewInputInHistory(value, 'number')
         }
     }
-    insertOperation(value) {
+    insertOperation(value) { //ввод операции
         switch (this.getLastElemType()) {
             case 'number':
                 if (this.inputHistory.length === 3) {
@@ -82,7 +100,7 @@ class Calculator {
             this.updateOutputDisplay('0')
         }
     }
-    doSquare() { //
+    doSquare() { //возведение в квадрат
         if (this.getLastElemType() === 'number') {
             this.editLastInput(this.square(this.getLastElemValue().toString()), 'number')
         } else if (this.getLastElemType() === null) {
@@ -91,7 +109,7 @@ class Calculator {
             this.updateOutputDisplay('0')
         }
     }
-    doCube() { //
+    doCube() { //вохведение в куб
         if (this.getLastElemType() === 'number') {
             this.editLastInput(this.cube(this.getLastElemValue().toString()), 'number')
         } else if (this.getLastElemType() === null) {
@@ -100,7 +118,7 @@ class Calculator {
             this.updateOutputDisplay('0')
         }
     }
-    doRootCube() { //
+    doRootCube() { //кубический корень
         if (this.getLastElemType() === 'number') {
             this.editLastInput(this.rootCube(this.getLastElemValue().toString()), 'number')
         } else if (this.getLastElemType() === null) {
@@ -109,12 +127,12 @@ class Calculator {
             this.updateOutputDisplay('0')
         }
     }
-    doRootSquare() { //
+    doRootSquare() { //квадратный корень
         if (this.getLastElemType() === 'number') {
-            this.editLastInput(this.rooSquare(this.getLastElemValue().toString()), 'number')
+            this.editLastInput(this.rootSquare(this.getLastElemValue().toString()), 'number')
         } else if (this.getLastElemType() === null) {
             this.addNewInputInHistory(this.getOutputValue(), 'number')
-            this.editLastInput(this.doRootSquare(this.getLastElemValue().toString()), 'number')
+            this.editLastInput(this.rootSquare(this.getLastElemValue().toString()), 'number')
             this.updateOutputDisplay('0')
         }
     }
@@ -127,7 +145,7 @@ class Calculator {
             this.updateOutputDisplay('0')
         }
     }
-    doFactorial() { //
+    doFactorial() { //факториал
         if (this.getLastElemType() === 'number') {
             this.editLastInput(this.factorial(this.getLastElemValue().toString()), 'number')
         } else if (this.getLastElemType() === null) {
@@ -145,7 +163,7 @@ class Calculator {
             this.updateOutputDisplay('0')
         }
     }
-    doDegreeXTen() {   //смена знака у числа
+    doDegreeXTen() {   //свозведение в степень десятку
         if (this.getLastElemType() === 'number') {
             this.editLastInput(this.degreeXten(this.getLastElemValue().toString()), 'number')
         } else if (this.getLastElemType() === null) {
@@ -186,74 +204,7 @@ class Calculator {
             this.updateInputDisplay()
         }
     }
-    //HELPER FUNCTIONS
-    switchPlusMinus(num) {
-        return num * -1
-    }
-    square(num) {
-        return num * num
-    }
-    cube(num) {
-        return num * num * num
-    }
-    complement(num) {
-        return 1 / num
-    }
-    switchNumPercent(num) {
-        return num / 100
-    }
-    sum(first, second) {
-        return first + second
-    }
-
-    minus(first, second) {
-        return first - second
-    }
-    multiply(first, second) {
-        return first * second
-    }
-    divide(first, second) {
-        if (first === 0 || second === 0) {
-            return 0
-        }
-        return first / second
-    }
-    rootXnum(num, n) {
-        if (num < 0 && n % 2 === 1)
-            return num ** 1 / n;
-        else
-            return num ** 1 / n
-    }
-    rooSquare(num) {
-        if (num < 0)
-            return (num * -1) ** (1 / 2);
-        else
-            return num ** (1 / 2)
-    }
-    rootCube(num) {
-        if (num < 0)
-            return (num * -1) ** (1 / 3);
-        else
-            return num ** (1 / 3)
-    }
-    degreeXnum(num, n) {
-        if (n != 1) {
-            return num *= this.degreeXnum(num, n - 1);
-        } else {
-            return num;
-        }
-    }
-    degreeXten(n) {
-        return 10 ** n
-    }
-    factorial(num) {
-        if (num === 0) {
-            return 1;
-        } else {
-            return num * this.factorial(num - 1)
-        }
-    }
-    performOperation(leftOperand, operation, rightOperand) {
+    performOperation(leftOperand, operation, rightOperand) { // выполнение мат действия с двумя операндами слева и справа
         leftOperand = parseFloat(leftOperand)
         rightOperand = parseFloat(rightOperand)
         if (Number.isNaN(leftOperand) || Number.isNaN(rightOperand)) {
@@ -300,7 +251,7 @@ class Calculator {
         this.updateInputDisplay()
     }
     getOutputValue() {  //
-        console.log(this.outputDisplay.value)//replace(/,/g, '')
+        console.log(this.outputDisplay.value)
         return this.outputDisplay.value.replace(/,/g, '.')
     }
     getLastElemValue() {//возвращает значение последнего введенного элемента
