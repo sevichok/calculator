@@ -1,8 +1,5 @@
 ### Creating a Calculator
 
-*Task:
-Follow the [link] https://drive.google.com/file/d/15jVnBPXaZrjs99KOUxp4TGq6Inau6xq_/view).
-
 *How to run the app:
 
 This basic calculator created with usage of basic JavaScript, without adding libraries.
